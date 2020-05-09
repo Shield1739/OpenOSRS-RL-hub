@@ -31,13 +31,20 @@ import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 import net.runelite.client.config.Units;
 
-@ConfigGroup(FlippingPlugin.CONFIG_GROUP)
+@ConfigGroup("flippingutilities")
 public interface FlippingConfig extends Config
 {
+	enum Fonts
+	{
+		SMALL_FONT,
+		REGULAR_FONT,
+		BOLD_FONT
+	}
+
 	@ConfigItem(
-		keyName = "storeTradeHistory",
-		name = "Store session trade history locally",
-		description = "Store your trade history to have your previous trade data show up on new game sessions"
+			keyName = "storeTradeHistory",
+			name = "Store session trade history",
+			description = "Store your trade history to have your previous trade data show up on new game sessions"
 	)
 	default boolean storeTradeHistory()
 	{
@@ -45,9 +52,9 @@ public interface FlippingConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "outOfDateWarning",
-		name = "Set how long before prices are outdated",
-		description = "Set how long before warning that prices are outdated"
+			keyName = "outOfDateWarning",
+			name = "Set how long before prices are outdated",
+			description = "Set how long before warning that prices are outdated"
 	)
 	@Units(Units.MINUTES)
 	default int outOfDateWarning()
@@ -56,9 +63,9 @@ public interface FlippingConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "roiGradientMax",
-		name = "Set ROI gradient range limit",
-		description = "Set the limit of the range before the gradient is bright green"
+			keyName = "roiGradientMax",
+			name = "Set ROI gradient range limit",
+			description = "Set the limit of the range before the gradient is bright green"
 	)
 	@Units(Units.PERCENT)
 	default int roiGradientMax()
@@ -67,9 +74,9 @@ public interface FlippingConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "marginCheckLoss",
-		name = "Account for margin check loss",
-		description = "Subtract the loss from margin checking the item when calculating the total profit"
+			keyName = "marginCheckLoss",
+			name = "Account for margin check loss",
+			description = "Subtract the loss from margin checking the item when calculating the total profit"
 	)
 	default boolean marginCheckLoss()
 	{
@@ -77,9 +84,9 @@ public interface FlippingConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "twelveHourFormat",
-		name = "12 hour format",
-		description = "Shows times in a 12 hour format (AM/PM)"
+			keyName = "twelveHourFormat",
+			name = "12 hour format",
+			description = "Shows times in a 12 hour format (AM/PM)"
 	)
 	default boolean twelveHourFormat()
 	{
@@ -87,9 +94,9 @@ public interface FlippingConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "remainingGELimitProfit",
-		name = "Calculate potential profit from remaining GE limit",
-		description = "If unchecked, the potential profit will be calculated from total GE limit."
+			keyName = "remainingGELimitProfit",
+			name = "Calculate potential profit from remaining GE limit",
+			description = "If unchecked, the potential profit will be calculated from total GE limit"
 	)
 	default boolean geLimitProfit()
 	{
@@ -97,13 +104,23 @@ public interface FlippingConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "autoFreezeMargin",
-		name = "Automatically freeze the margin of new items.",
-
-		description = "Ensures that every item that gets added has its margin frozen to prevent its "
-			+ "margin from being updated by subsequent buys/sells of one."
+			keyName = "subInfoFont",
+			name = "Set sub info font",
+			description = "Choose the font for sub information on the panel"
 	)
-	default boolean autoFreezeMargin()
+	default Fonts subInfoFontStyle()
+	{
+		return Fonts.SMALL_FONT;
+	}
+
+	@ConfigItem(
+			keyName = "multiAccTracking",
+			name = "Enable multi account tracking",
+			description = "<html>Enabling this feature gives you access to a dropdown"
+					+ "<br>which allows you to see each of your accounts flips and profits in isolation."
+					+ "<br>This is very useful if you flip on multiple accounts.</html>"
+	)
+	default boolean multiAccTracking()
 	{
 		return false;
 	}
